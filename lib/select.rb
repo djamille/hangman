@@ -11,7 +11,7 @@ class Select
         selected = words.sample
         forca = selected.split('')
         puts "Dica! A palavra tem #{forca.length} letras!"
-
+        
         forca
     end
 end

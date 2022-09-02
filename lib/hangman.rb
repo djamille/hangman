@@ -5,7 +5,7 @@ class Hangman
     attr_accessor :forca, :tentativas, :erradas, :certas
 
     NUMERO_TENTATIVAS = 15
-
+    
     def initialize
         @tentativas = 0
         @erradas = []
@@ -17,10 +17,10 @@ class Hangman
         @forca = Select.select_word
 
         until @tentativas == NUMERO_TENTATIVAS
-            puts "Você tem #{NUMERO_TENTATIVAS - @tentativas} tentativas!"
+            puts "\n\nVocê tem #{NUMERO_TENTATIVAS - @tentativas} tentativas!"
             puts "\n Digite uma letra "
-            letra = gets.chomp()
-    
+            letra = gets.chomp      
+            
             if @certas.include?(letra) || @erradas.include?(letra)
                 puts "Você ja digitou essa letra. Tente outra!\n\n"
             else
@@ -33,21 +33,25 @@ class Hangman
                     print "Ah, que pena! Não tem a letra #{letra}  \n\n"
                 end
             end
-
-            print_forca(forca, certas)
             
+            print_forca(forca, certas)
+            if @forca.uniq == @certas
+                puts "\n\n Você venceu! \n\n"
+            end
+
+            break if @forca.uniq == @certas
+
         end
     end
     
     def print_forca(forca, certas)
+        erro = "_ "
         forca.each do |letra_forca|
             if certas.include?("#{letra_forca}")
                 print letra_forca
             else 
-                print "_ "
+                print "#{erro}"
             end
         end
-
-        print "\n\n"
     end
 end
